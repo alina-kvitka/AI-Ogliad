@@ -1,0 +1,16 @@
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+# Build files
+build/
+out/
+*.class
+*.log
+# Local application state
+news.xml
+favorites.txt
+*.tmp
+# Credentials
+.env
+.env.*
