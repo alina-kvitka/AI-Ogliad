@@ -7,7 +7,6 @@ import java.awt.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.*;
 
 /** Вікно першого етапу. Бізнес-логіка винесена в окремі сервіси. */
 public final class NewsWindow extends JPanel {
@@ -203,11 +202,7 @@ public final class NewsWindow extends JPanel {
         b.getAccessibleContext().setAccessibleName("Сторінка: "+text);
         b.addActionListener(e->{currentPage=target;render();cards.scrollRectToVisible(new Rectangle(0,0,1,1));});pagination.add(b);
     }
-    private static String shorten(String text,int length) {
-        if(text.length()<=length)return text;
-        int end=text.lastIndexOf(' ',length-1);
-        return text.substring(0,end>length/2?end:length-1)+"…";
-    }
+    
     private JPanel card(NewsArticle a) {
         JPanel c = new RoundPanel(); c.setLayout(new BorderLayout(0,6)); c.setBorder(new EmptyBorder(12,16,12,16)); c.setPreferredSize(new Dimension(400,186));
         JPanel top = new JPanel(new BorderLayout()); top.setOpaque(false);
@@ -366,10 +361,7 @@ public final class NewsWindow extends JPanel {
             JOptionPane.showMessageDialog(this,new Object[]{"Не вдалося відкрити браузер. Скопіюйте посилання:",link},"Посилання на статтю",JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    private static JTextArea area(String text,int size,Color color,boolean bold) {
-        JTextArea a=new JTextArea(text); a.setFont(font(size,bold)); a.setForeground(color); a.setOpaque(false);
-        a.setRows(3); a.setEditable(false); a.setLineWrap(true); a.setWrapStyleWord(true); a.setFocusable(false); return a;
-    }
+    
     static Font headlineFont(int size){return FontSupport.forHeadline(size);}
     static JLabel headlineLabel(String text,int size){JLabel label=label(text,size,INK,true);label.setFont(headlineFont(size));return label;}
     static Font font(int size,boolean bold){return FontSupport.forUi(size,bold);}
